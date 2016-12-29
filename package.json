@@ -1,0 +1,21 @@
+{
+  "main": "system/index.html",
+  "name": "Agua de Hermosillo",
+  "description": "app Megacable nw.js",
+  "version": "0.1.0",
+  "keywords": [ "Agua", "node-webkit" ],
+  "window": {
+    "title": "Agua de Hermosillo",
+    "toolbar": false,
+    "frame": true,
+    "width": 1024,
+    "height": 600,
+    "max_width": 1024,
+    "max_height": 600
+    //"kiosk": true,
+    //"fullscreen": true
+  },
+  "webkit": {
+    "plugin": true
+  }
+}
