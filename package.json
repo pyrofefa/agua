@@ -1,11 +1,12 @@
 {
   "main": "system/index.html",
-  "name": "Agua de Hermosillo",
-  "description": "app Megacable nw.js",
+  "name": "Agua de Hermosillo turnomatic",
+  "description": "app turnomatic nw.js",
   "version": "0.1.0",
   "keywords": [ "Agua", "node-webkit" ],
   "window": {
     "title": "Agua de Hermosillo",
+    "icon": "icon/logo_agua.png",
     "toolbar": false,
     "frame": true,
     "width": 1024,

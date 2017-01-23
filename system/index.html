@@ -11,6 +11,27 @@
 <title>Turnos</title>
 <!--Iniciando el primer controlador inicioController-->
 <body ng-controller='inicioController'>
+<div id="aparecer" style="width: 300px; height: 100px;">
+	<div class="row" id="oculto" hidden>
+		<div class="col-md-6">
+			<div>
+			    <select class="form-control" id="nombre"">
+			        <option value='1'>Módulo Central</option>
+			        <option value='2'>Módulo Centro</option>
+			        <option value='3'>Módulo Sahuaro</option>
+			        <option value='4'>Módulo Nor-Oriente</option>
+			        <option value='5'>Módulo Tanque Kino</option>
+			        <option value='6'>Módulo Xólotl</option>
+			        <option value='7'>Módulo Progreso</option>
+			        <option value='8'>Módulo Pabellón Reforma</option>
+			    </select>
+		   	</div>
+		</div>
+		<div class="col-md-6">			    
+			<span class="btn btn-success" id="ocultar">ocultar</span>
+		</div>
+	</div>
+</div>	
 <div ng-view>
 <!-- Aquí inyectamos las vistas-->	
 </div>
@@ -19,5 +40,6 @@
 <script src="js/angular-resource.min.js"></script>
 <script src="js/main.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/cambio.js"></script>
 </body>
 </html>

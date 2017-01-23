@@ -1,4 +1,5 @@
-<br><br><br><br><br><br><br><br><br>
+<br><br><br><br>
+<div ng-controller="aclaracionesController">
 <div class="container" ng-repeat="data in datos">
 	<div class="row">
 		<div class="col-md-12" style="position: absolute; left: 15px;">
@@ -6,34 +7,35 @@
 		</div>	
 	</div>
 	<div class="row" style="position: absolute; top: 270px;">
-		<div class="col-md-3" style="width: 240px;" ng-click="alto_consumo(data.id, data.numero)">
+		<div class="col-md-3" style="width: 240px;" ng-click="alto_consumo(data.numero)">
 			<img src="img/btnaltoconsumo.png">
 		</div>
-		<div class="col-md-3" style="width: 240px;" ng-click="reconexion(data.id, data.numero)">
+		<div class="col-md-3" style="width: 240px;" ng-click="reconexion(data.numero)">
 			<img src="img/btnreconexion.png">
 		</div>
-		<div class="col-md-3" style="width: 240px;" ng-click="alto_consumo_estimado(data.id, data.numero)">
+		<div class="col-md-3" style="width: 240px;" ng-click="alto_consumo_estimado(data.numero)">
 			<img src="img/btnaltoconsumoe.png">
 		</div>
-		<div class="col-md-3" style="width: 240px;" ng-click="cambio_tarifa(data.id, data.numero)">
+		<div class="col-md-3" style="width: 240px;" ng-click="cambio_tarifa(data.numero)">
 			<img src="img/btncambio.png">
 		</div>
 	</div>
 	<div class="row" style="position: absolute; top: 375px;">
-		<div class="col-md-3" style="width: 240px;" ng-click="error_lectura(data.id, data.numero)">
+		<div class="col-md-3" style="width: 240px;" ng-click="error_lectura(data.numero)">
 			<img src="img/btnerror.png">
 		</div>
-		<div class="col-md-3" style="width: 240px;" ng-click="correccion_datos(data.id, data.numero)">
+		<div class="col-md-3" style="width: 240px;" ng-click="correccion_datos(data.numero)">
 			<img src="img/btncorreccion.png">
 		</div>
-		<div class="col-md-3" style="width: 240px;" ng-click="no_toma_lectura(data.id, data.numero)">
+		<div class="col-md-3" style="width: 240px;" ng-click="no_toma_lectura(data.numero)">
 			<img src="img/btnnotoma.png">
 		</div>
-		<div class="col-md-3" style="width: 240px;" ng-click="otros_tramites(data.id, data.numero)">
+		<div class="col-md-3" style="width: 240px;" ng-click="otros_tramites(data.numero)">
 			<img src="img/btnotros.png">
 		</div>
 	</div>
 	<div style="position: absolute; top: 500px;">
 		<a href="#/"><img src="img/btnvolver.png"></a>
 	</div>		
+</div>
 </div>
