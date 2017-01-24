@@ -13,10 +13,14 @@
 				<h1 style="text-align: center;"><img src="img/tramites.png"></h1>
 			</a>
 		</div>
-		<div class="col-md-4">
-			<a href="#/">
-				<h1 style="text-align: center;"><img src="img/pago.png"></h1>
-			</a>
+		<div ng-controller='tramitesController'>
+			<div ng-repeat="data in datos">
+				<div class="col-md-4" ng-click="pagos(data.numero)">
+					<a href="#/">
+						<h1 style="text-align: center;"><img src="img/pago.png"></h1>
+					</a>
+				</div>
+			</div>	
 		</div>
 		<div class="col-md-4">
 			<br>

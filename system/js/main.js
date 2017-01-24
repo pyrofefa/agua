@@ -63,6 +63,39 @@ rutas.controller('tramitesController', function($scope, $http, socket)
     });
     
     /*Tramites*/
+    $scope.pagos = function($numero)
+    {
+        
+        socket.emit("pago", $numero);
+        //agregando numero a la tabla tikets
+         $http({
+            method:"post",
+            //url: "http://agua.dev/tikets",
+            url: "http://localhost/admin_agua/public/tikets",
+            data: ({'turno' : $numero, 'id_sucursal' : '1' , 'estado' :  '0', 'asunto' : 'Pago', 'subasunto' : 'Pagos y Tramites'})
+        }).success(function(data){
+            console.log("datos guardados con exito");
+        }).error(function(data){
+            console.log("ha ocurrido un error en guardar los datos");
+        })
+
+        //actualizando tabla folios incrementando a 1 cada vez
+        $http({
+            method:"put",
+            url: "http://localhost/admin_agua/public/folios/actualizar/1",
+            //url: "http://agua.dev/folios/actualizar/"+$id,
+            data: ({ 'numero' : $numero })
+        }).success(function(data){
+                //alert("Datos actualizados con exito");
+                window.location.href = '#/final';
+                socket.emit("imprimir");
+        }).error(function(data){
+            alert("Ha ocurrido un error al actualizar los datos");
+                //console.log(id);
+        })
+    }
+
+
     $scope.contratos = function($numero)
     {
         
@@ -72,7 +105,7 @@ rutas.controller('tramitesController', function($scope, $http, socket)
             method:"post",
             //url: "http://agua.dev/tikets",
             url: "http://localhost/admin_agua/public/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1' , 'estado' :  '0', 'asunto' : 'Contrato', 'subasunto' : 'Trámites'})
+            data: ({'turno' : $numero, 'id_sucursal' : '1' , 'estado' :  '0', 'asunto' : 'Contrato', 'subasunto' : 'Pagos y Tramites'})
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -104,7 +137,7 @@ rutas.controller('tramitesController', function($scope, $http, socket)
             method:"post",
             //url: "http://agua.dev/tikets",
             url: "http://localhost/admin_agua/public/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1',  'estado' :  '0', 'asunto' : 'Convenio', 'subasunto' : 'Trámites' })
+            data: ({'turno' : $numero, 'id_sucursal' : '1',  'estado' :  '0', 'asunto' : 'Convenio', 'subasunto' : 'Pagos y Tramites' })
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -136,7 +169,7 @@ rutas.controller('tramitesController', function($scope, $http, socket)
             method:"post",
             url: "http://localhost/admin_agua/public/tikets",
             //url: "http://agua.dev/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Cambio de nombre', 'subasunto' : 'Trámites' })
+            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Cambio de nombre', 'subasunto' : 'Pagos y Tramites' })
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -168,7 +201,7 @@ rutas.controller('tramitesController', function($scope, $http, socket)
             method:"post",
             url: "http://localhost/admin_agua/public/tikets",
             //url: "http://agua.dev/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Carta de adeudo', 'subasunto' : 'Trámites' })
+            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Carta de adeudo', 'subasunto' : 'Pagos y Tramites' })
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -200,7 +233,7 @@ rutas.controller('tramitesController', function($scope, $http, socket)
             method:"post",
             url: "http://localhost/admin_agua/public/tikets",
             //url: "http://agua.dev/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Factibilidad', 'subasunto' : 'Trámites' })
+            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Factibilidad', 'subasunto' : 'Pagos y Tramites' })
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -232,7 +265,7 @@ rutas.controller('tramitesController', function($scope, $http, socket)
             method:"post",
             //url: "http://agua.dev/tikets",
             url: "http://localhost/admin_agua/public/tikets",
-            data: ({'turno' : $numero , 'id_sucursal' : '1' , 'estado' :  '0', 'asunto' : '2 ó más trámites', 'subasunto' : 'Trámites' })
+            data: ({'turno' : $numero , 'id_sucursal' : '1' , 'estado' :  '0', 'asunto' : '2 ó más trámites', 'subasunto' : 'Pagos y Tramites' })
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
