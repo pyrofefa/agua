@@ -6,29 +6,29 @@
 			<h1 style="text-align: center;"><img src="img/seleccionar.png"></h1>
 		</div>	
 	</div>
-	<div class="row" style="position: absolute; top: 270px;">
+	<div class="row" style="position: absolute; top: 260px;">
 		<div class="col-md-3" style="width: 240px;" ng-click="alto_consumo(data.numero)">
 			<img src="img/btnaltoconsumo.png">
 		</div>
 		<div class="col-md-3" style="width: 240px;" ng-click="reconexion(data.numero)">
 			<img src="img/btnreconexion.png">
 		</div>
-		<div class="col-md-3" style="width: 240px;" ng-click="alto_consumo_estimado(data.numero)">
-			<img src="img/btnaltoconsumoe.png">
+		<div class="col-md-3" style="width: 240px;" ng-click="error_lectura(data.numero)">
+			<img src="img/btnerror.png">
+		</div>
+		<div class="col-md-3" style="width: 240px;" ng-click="no_toma_lectura(data.numero)">
+			<img src="img/btnnotomalectura.png">
+		</div>
+	</div>
+	<div class="row" style="position: absolute; top: 375px;">
+		<div class="col-md-3" style="width: 240px;" ng-click="noentrega(data.numero)">
+			<img src="img/btnnoentrega.png">
 		</div>
 		<div class="col-md-3" style="width: 240px;" ng-click="cambio_tarifa(data.numero)">
 			<img src="img/btncambio.png">
 		</div>
-	</div>
-	<div class="row" style="position: absolute; top: 375px;">
-		<div class="col-md-3" style="width: 240px;" ng-click="error_lectura(data.numero)">
-			<img src="img/btnerror.png">
-		</div>
-		<div class="col-md-3" style="width: 240px;" ng-click="correccion_datos(data.numero)">
-			<img src="img/btncorreccion.png">
-		</div>
-		<div class="col-md-3" style="width: 240px;" ng-click="no_toma_lectura(data.numero)">
-			<img src="img/btnnotoma.png">
+		<div class="col-md-3" style="width: 240px;" ng-click="solicitud(data.numero)">
+			<img src="img/btnsolicitud.png">
 		</div>
 		<div class="col-md-3" style="width: 240px;" ng-click="otros_tramites(data.numero)">
 			<img src="img/btnotros.png">

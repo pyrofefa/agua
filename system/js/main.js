@@ -12,8 +12,8 @@ rutas.config(function($routeProvider) {
             controller  : 'inicioController'
         })
        .when('/pagos_tramites', {
-            templateUrl : 'vistas/pagos_tramites.html',
-            controller  : 'pagosController'
+            templateUrl : 'vistas/tramites.html',
+            controller  : 'inicioController'
         })
         .when('/aclaraciones_otros', {
             templateUrl : 'vistas/aclaraciones_otros.html',
@@ -46,13 +46,13 @@ rutas.factory('socket',['$rootScope', function(){
 rutas.controller('inicioController', function($scope) 
 {
 });
-rutas.controller('pagosController', function($scope, $http, socket) 
+rutas.controller('tramitesController', function($scope, $http, socket) 
 {
     //console.log(sucursal);
     //trayendo folios
     $http({
         method:"get",
-        url: "http://localhost/admin_agua/public/folios/pagos/"+sucursal
+        url: "http://localhost/admin_agua/public/folios/pagos/1"
         //url:"http://agua.dev/folios"
     }).success(function(data)
     {
@@ -62,39 +62,7 @@ rutas.controller('pagosController', function($scope, $http, socket)
         alert("Ha ocurrido un error al mostrar los datos");
     });
     
-    /*Pagos y tramites*/
-    $scope.pagos = function($numero)
-    {
-        
-        //alert($numero);
-        socket.emit("pdf", $numero);
-        //agregando numero a la tabla tikets
-        $http({
-            method:"post",
-            //url: "http://agua.dev/tikets",
-            url: "http://localhost/admin_agua/public/tikets",
-            data: ({'turno' : $numero , 'id_sucursal' : sucursal , 'estado' :  '0', 'asunto' : 'Pago', 'subasunto' : 'Pagos y Tramites' })
-        }).success(function(data){
-            console.log("datos guardados con exito");
-        }).error(function(data){
-            console.log("ha ocurrido un error en guardar los datos");
-        })
-
-        //actualizando tabla folios incrementando a 1 cada vez
-        $http({
-            method:"put",
-            //url: "http://agua.dev/folios/actualizar/"+$id,
-            url: "http://localhost/admin_agua/public/folios/actualizar/"+sucursal,
-            data: ({ 'numero' : $numero })
-        }).success(function(data){
-                //alert("Datos actualizados con exito");
-                window.location.href = '#/final';
-                socket.emit("imprimir");
-        }).error(function(data){
-            alert("Ha ocurrido un error al actualizar los datos");
-                //console.log(id);
-        })
-    };
+    /*Tramites*/
     $scope.contratos = function($numero)
     {
         
@@ -104,7 +72,7 @@ rutas.controller('pagosController', function($scope, $http, socket)
             method:"post",
             //url: "http://agua.dev/tikets",
             url: "http://localhost/admin_agua/public/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : sucursal , 'estado' :  '0', 'asunto' : 'Contrato', 'subasunto' : 'Pagos y Tramites'})
+            data: ({'turno' : $numero, 'id_sucursal' : '1' , 'estado' :  '0', 'asunto' : 'Contrato', 'subasunto' : 'Trámites'})
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -114,7 +82,7 @@ rutas.controller('pagosController', function($scope, $http, socket)
         //actualizando tabla folios incrementando a 1 cada vez
         $http({
             method:"put",
-            url: "http://localhost/admin_agua/public/folios/actualizar/"+sucursal,
+            url: "http://localhost/admin_agua/public/folios/actualizar/1",
             //url: "http://agua.dev/folios/actualizar/"+$id,
             data: ({ 'numero' : $numero })
         }).success(function(data){
@@ -136,7 +104,7 @@ rutas.controller('pagosController', function($scope, $http, socket)
             method:"post",
             //url: "http://agua.dev/tikets",
             url: "http://localhost/admin_agua/public/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : sucursal,  'estado' :  '0', 'asunto' : 'Convenio', 'subasunto' : 'Pagos y Tramites' })
+            data: ({'turno' : $numero, 'id_sucursal' : '1',  'estado' :  '0', 'asunto' : 'Convenio', 'subasunto' : 'Trámites' })
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -168,7 +136,7 @@ rutas.controller('pagosController', function($scope, $http, socket)
             method:"post",
             url: "http://localhost/admin_agua/public/tikets",
             //url: "http://agua.dev/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : sucursal, 'estado' :  '0', 'asunto' : 'Cambio de nombre', 'subasunto' : 'Pagos y Tramites' })
+            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Cambio de nombre', 'subasunto' : 'Trámites' })
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -178,7 +146,7 @@ rutas.controller('pagosController', function($scope, $http, socket)
         //actualizando tabla folios incrementando a 1 cada vez
         $http({
             method:"put",
-            url: "http://localhost/admin_agua/public/folios/actualizar/"+sucursal,
+            url: "http://localhost/admin_agua/public/folios/actualizar/1",
             //url: "http://agua.dev/folios/actualizar/"+$id,
             data: ({ 'numero' : $numero })
         }).success(function(data){
@@ -200,7 +168,7 @@ rutas.controller('pagosController', function($scope, $http, socket)
             method:"post",
             url: "http://localhost/admin_agua/public/tikets",
             //url: "http://agua.dev/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : sucursal, 'estado' :  '0', 'asunto' : 'Carta de adeudo', 'subasunto' : 'Pagos y Tramites' })
+            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Carta de adeudo', 'subasunto' : 'Trámites' })
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -210,7 +178,7 @@ rutas.controller('pagosController', function($scope, $http, socket)
         //actualizando tabla folios incrementando a 1 cada vez
         $http({
             method:"put",
-            url: "http://localhost/admin_agua/public/folios/actualizar/"+sucursal,
+            url: "http://localhost/admin_agua/public/folios/actualizar/1",
             //url: "http://agua.dev/folios/actualizar/"+$id,
             data: ({ 'numero' : $numero })
         }).success(function(data){
@@ -232,7 +200,7 @@ rutas.controller('pagosController', function($scope, $http, socket)
             method:"post",
             url: "http://localhost/admin_agua/public/tikets",
             //url: "http://agua.dev/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : sucursal, 'estado' :  '0', 'asunto' : 'Factibilidad', 'subasunto' : 'Pagos y Tramites' })
+            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Factibilidad', 'subasunto' : 'Trámites' })
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -242,7 +210,7 @@ rutas.controller('pagosController', function($scope, $http, socket)
         //actualizando tabla folios incrementando a 1 cada vez
         $http({
             method:"put",
-            url: "http://localhost/admin_agua/public/folios/actualizar/"+sucursal,
+            url: "http://localhost/admin_agua/public/folios/actualizar/1",
             //url: "http://agua.dev/folios/actualizar/"+$id,
             data: ({ 'numero' : $numero })
         }).success(function(data){
@@ -254,6 +222,38 @@ rutas.controller('pagosController', function($scope, $http, socket)
                 //console.log(id);
         })
     }
+    $scope.dostramites = function($numero)
+    {
+        
+        //alert($numero);
+        socket.emit("pdf", $numero);
+        //agregando numero a la tabla tikets
+        $http({
+            method:"post",
+            //url: "http://agua.dev/tikets",
+            url: "http://localhost/admin_agua/public/tikets",
+            data: ({'turno' : $numero , 'id_sucursal' : '1' , 'estado' :  '0', 'asunto' : '2 ó más trámites', 'subasunto' : 'Trámites' })
+        }).success(function(data){
+            console.log("datos guardados con exito");
+        }).error(function(data){
+            console.log("ha ocurrido un error en guardar los datos");
+        })
+
+        //actualizando tabla folios incrementando a 1 cada vez
+        $http({
+            method:"put",
+            //url: "http://agua.dev/folios/actualizar/"+$id,
+            url: "http://localhost/admin_agua/public/folios/actualizar/1",
+            data: ({ 'numero' : $numero })
+        }).success(function(data){
+                //alert("Datos actualizados con exito");
+                window.location.href = '#/final';
+                socket.emit("imprimir");
+        }).error(function(data){
+            alert("Ha ocurrido un error al actualizar los datos");
+                //console.log(id);
+        })
+    };
     /*Fin de servicios*/
 });
 rutas.controller('aclaracionesController', function($scope, $http, socket) 
@@ -261,7 +261,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
     //trayendo folios
     $http({
         method:"get",
-        url: "http://localhost/admin_agua/public/folios/aclaraciones/"+sucursal
+        url: "http://localhost/admin_agua/public/folios/aclaraciones/1"
         //url:"http://agua.dev/folios"
     }).success(function(data)
     {
@@ -281,7 +281,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
             method:"post",
             url: "http://localhost/admin_agua/public/tikets",
             //url: "http://agua.dev/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : sucursal, 'estado' :  '0', 'asunto' : 'Alto Consumo (Medidor)', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Alto consumo (con y sin medidor)', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -291,7 +291,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         //actualizando tabla folios incrementando a 1 cada vez
         $http({
             method:"put",
-            url: "http://localhost/admin_agua/public/folios/actualizar_aclaraciones/"+sucursal,
+            url: "http://localhost/admin_agua/public/folios/actualizar_aclaraciones/1",
             //url: "http://agua.dev/folios/actualizar/"+$id,
             data: ({ 'numero' : $numero })
         }).success(function(data){
@@ -313,7 +313,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
             method:"post",
             url: "http://localhost/admin_agua/public/tikets",
             //url: "http://agua.dev/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : sucursal, 'estado' :  '0', 'asunto' : 'Reconexion', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Reconexión de servicio', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -323,7 +323,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         //actualizando tabla folios incrementando a 1 cada vez
         $http({
             method:"put",
-            url: "http://localhost/admin_agua/public/folios/actualizar_aclaraciones/"+sucursal,
+            url: "http://localhost/admin_agua/public/folios/actualizar_aclaraciones/1",
             //url: "http://agua.dev/folios/actualizar/"+$id,
             data: ({ 'numero' : $numero })
         }).success(function(data){
@@ -335,17 +335,81 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
                 //console.log(id);
         })
     }
-    $scope.alto_consumo_estimado = function($numero)
+    $scope.error_lectura = function($numero)
     {
 
-        socket.emit("alto_consumo_estimado", $numero);
+        socket.emit("error_lectura", $numero);
 
         //agregando numero a la tabla tikets
         $http({
             method:"post",
             url: "http://localhost/admin_agua/public/tikets",
             //url: "http://agua.dev/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : sucursal, 'estado' :  '0', 'asunto' : 'Alto Consumo (Estimado)', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Error en lectura', 'subasunto' : 'Aclaraciones y Otros' })
+        }).success(function(data){
+            console.log("datos guardados con exito");
+        }).error(function(data){
+            console.log("ha ocurrido un error en guardar los datos");
+        })
+
+        //actualizando tabla folios incrementando a 1 cada vez
+        $http({
+            method:"put",
+            url: "http://localhost/admin_agua/public/folios/actualizar_aclaraciones/1",
+            //url: "http://agua.dev/folios/actualizar/"+$id,
+            data: ({ 'numero' : $numero })
+        }).success(function(data){
+                //alert("Datos actualizados con exito");
+                window.location.href = '#/final';
+                socket.emit("imprimir");
+        }).error(function(data){
+            alert("Ha ocurrido un error al actualizar los datos");
+                //console.log(id);
+        })
+    }
+    $scope.no_toma_lectura = function($numero)
+    {
+        
+        socket.emit("no_toma_lectura", $numero);
+
+        //agregando numero a la tabla tikets
+        $http({
+            method:"post",
+            url: "http://localhost/admin_agua/public/tikets",
+            //url: "http://agua.dev/tikets",
+            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'No toma lectura', 'subasunto' : 'Aclaraciones y Otros' })
+        }).success(function(data){
+            console.log("datos guardados con exito");
+        }).error(function(data){
+            console.log("ha ocurrido un error en guardar los datos");
+        })
+
+        //actualizando tabla folios incrementando a 1 cada vez
+        $http({
+            method:"put",
+            url: "http://localhost/admin_agua/public/folios/actualizar_aclaraciones/1",
+            //url: "http://agua.dev/folios/actualizar/"+$id,
+            data: ({ 'numero' : $numero })
+        }).success(function(data){
+                //alert("Datos actualizados con exito");
+                window.location.href = '#/final';
+                socket.emit("imprimir");
+        }).error(function(data){
+            alert("Ha ocurrido un error al actualizar los datos");
+                //console.log(id);
+        })
+    }    
+    $scope.noentrega = function($numero)
+    {
+
+        socket.emit("no_entrega", $numero);
+
+        //agregando numero a la tabla tikets
+        $http({
+            method:"post",
+            url: "http://localhost/admin_agua/public/tikets",
+            //url: "http://agua.dev/tikets",
+            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'No entrega de recibo', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -377,7 +441,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
             method:"post",
             url: "http://localhost/admin_agua/public/tikets",
             //url: "http://agua.dev/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : sucursal, 'estado' :  '0', 'asunto' : 'Cambio de tarifa', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Cambio de tarifa', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -387,7 +451,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         //actualizando tabla folios incrementando a 1 cada vez
         $http({
             method:"put",
-            url: "http://localhost/admin_agua/public/folios/actualizar_aclaraciones/"+sucursal,
+            url: "http://localhost/admin_agua/public/folios/actualizar_aclaraciones/1",
             //url: "http://agua.dev/folios/actualizar/"+$id,
             data: ({ 'numero' : $numero })
         }).success(function(data){
@@ -399,17 +463,18 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
                 //console.log(id);
         })
     }
-    $scope.error_lectura = function($numero)
+
+    $scope.solicitud = function($numero)
     {
-
-        socket.emit("error_lectura", $numero);
-
+        
+        socket.emit("solicitud", $numero);
+        
         //agregando numero a la tabla tikets
         $http({
             method:"post",
             url: "http://localhost/admin_agua/public/tikets",
             //url: "http://agua.dev/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : sucursal, 'estado' :  '0', 'asunto' : 'Error de lectura', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Solicitud de medidor', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -419,71 +484,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         //actualizando tabla folios incrementando a 1 cada vez
         $http({
             method:"put",
-            url: "http://localhost/admin_agua/public/folios/actualizar_aclaraciones/"+sucursal,
-            //url: "http://agua.dev/folios/actualizar/"+$id,
-            data: ({ 'numero' : $numero })
-        }).success(function(data){
-                //alert("Datos actualizados con exito");
-                window.location.href = '#/final';
-                socket.emit("imprimir");
-        }).error(function(data){
-            alert("Ha ocurrido un error al actualizar los datos");
-                //console.log(id);
-        })
-    }
-    $scope.correccion_datos = function($numero)
-    {
-        
-        socket.emit("correccion", $numero);
-        
-        //agregando numero a la tabla tikets
-        $http({
-            method:"post",
-            url: "http://localhost/admin_agua/public/tikets",
-            //url: "http://agua.dev/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : sucursal, 'estado' :  '0', 'asunto' : 'Correccion de datos', 'subasunto' : 'Aclaraciones y Otros' })
-        }).success(function(data){
-            console.log("datos guardados con exito");
-        }).error(function(data){
-            console.log("ha ocurrido un error en guardar los datos");
-        })
-
-        //actualizando tabla folios incrementando a 1 cada vez
-        $http({
-            method:"put",
-            url: "http://localhost/admin_agua/public/folios/actualizar_aclaraciones/"+sucursal,
-            //url: "http://agua.dev/folios/actualizar/"+$id,
-            data: ({ 'numero' : $numero })
-        }).success(function(data){
-                //alert("Datos actualizados con exito");
-                window.location.href = '#/final';
-                socket.emit("imprimir");
-        }).error(function(data){
-            alert("Ha ocurrido un error al actualizar los datos");
-                //console.log(id);
-        })
-    }
-    $scope.no_toma_lectura = function($numero)
-    {
-        
-        socket.emit("no_toma_lectura", $numero);
-
-        //agregando numero a la tabla tikets
-        $http({
-            method:"post",
-            url: "http://localhost/admin_agua/public/tikets",
-            //url: "http://agua.dev/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : sucursal, 'estado' :  '0', 'asunto' : 'No Toma Lectura', 'subasunto' : 'Aclaraciones y Otros' })
-        }).success(function(data){
-            console.log("datos guardados con exito");
-        }).error(function(data){
-            console.log("ha ocurrido un error en guardar los datos");
-        })
-
-        //actualizando tabla folios incrementando a 1 cada vez
-        $http({
-            method:"put",
-            url: "http://localhost/admin_agua/public/folios/actualizar_aclaraciones/"+sucursal,
+            url: "http://localhost/admin_agua/public/folios/actualizar_aclaraciones/1",
             //url: "http://agua.dev/folios/actualizar/"+$id,
             data: ({ 'numero' : $numero })
         }).success(function(data){
@@ -505,7 +506,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
             method:"post",
             url: "http://localhost/admin_agua/public/tikets",
             //url: "http://agua.dev/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : sucursal, 'estado' :  '0', 'asunto' : 'Otros Tramites', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Otros trámites', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -515,7 +516,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         //actualizando tabla folios incrementando a 1 cada vez
         $http({
             method:"put",
-            url: "http://localhost/admin_agua/public/folios/actualizar_aclaraciones/"+sucursal,
+            url: "http://localhost/admin_agua/public/folios/actualizar_aclaraciones/1",
             //url: "http://agua.dev/folios/actualizar/"+$id,
             data: ({ 'numero' : $numero })
         }).success(function(data){
