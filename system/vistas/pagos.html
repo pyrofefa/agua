@@ -1,0 +1,24 @@
+<br><br><br><br>
+<div ng-controller="pagosController">
+<div class="container" ng-repeat="data in datos">
+	<div class="row">
+		<div class="col-md-12" style="position: absolute; left: 15px;">
+			<h1 style="text-align: center;"><img src="img/seleccionar.png"></h1>
+		</div>
+	</div>
+	<div class="row" style="width:850px; position: absolute; left: 120px; top: 270px;">
+		<div class="col-md-4" ng-click="pagos(data.numero)">
+			<img src="img/btnpago.png">
+		</div>
+		<div class="col-md-4" ng-click="conveniopago(data.numero)">
+			<img src="img/btnconveniopago.png">
+		</div>
+		<div class="col-md-4" ng-click="cartapago(data.numero)">
+			<img src="img/btncartapago.png">
+		</div>
+	</div>
+	<div style="position: absolute; top: 500px;">
+		<a href="#/"><img src="img/btnvolver.png"></a>
+	</div>
+</div>
+</div>
