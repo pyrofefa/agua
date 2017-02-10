@@ -57,8 +57,8 @@ rutas.controller('pagosController', function($scope, $http, socket)
     //trayendo folios
     $http({
         method:"get",
-        url: "http://192.168.1.57:8080/turnomatic/public/folios/pagos/1"
-        //url:"http://agua.dev/folios"
+        //url: "http://192.168.1.57:8080/turnomatic/public/folios/pagos/1"
+        url: "http://localhost/turnomatic/public/folios/pagos/1"
     }).success(function(data)
     {
         //console.log(data);
@@ -70,12 +70,12 @@ rutas.controller('pagosController', function($scope, $http, socket)
     $scope.pagos = function($numero)
     {
         
-        socket.emit("pago", "P"+$numero);
+        socket.emit("pago","P"+$numero);
         //agregando numero a la tabla tikets
          $http({
             method:"post",
-            //url: "http://agua.dev/tikets",
-            url: "http://192.168.1.57:8080/turnomatic/public/tikets",
+            //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
+            url: "http://localhost/turnomatic/public/tikets",
             data: ({'turno' : $numero, 'id_sucursal' : '1' , 'estado' :  '0', 'asunto' : 'Pago', 'subasunto' : 'Pago'})
         }).success(function(data){
             console.log("datos guardados con exito");
@@ -86,8 +86,8 @@ rutas.controller('pagosController', function($scope, $http, socket)
         //actualizando tabla folios incrementando a 1 cada vez
         $http({
             method:"put",
-            url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar/1",
-            //url: "http://agua.dev/folios/actualizar/"+$id,
+            //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar/1",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
@@ -105,8 +105,8 @@ rutas.controller('pagosController', function($scope, $http, socket)
         //agregando numero a la tabla tikets
          $http({
             method:"post",
-            //url: "http://agua.dev/tikets",
-            url: "http://192.168.1.57:8080/turnomatic/public/tikets",
+            url: "http://localhost/turnomatic/public/tikets",
+            //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
             data: ({'turno' : $numero, 'id_sucursal' : '1' , 'estado' :  '0', 'asunto' : 'Pago de convenio', 'subasunto' : 'Pago'})
         }).success(function(data){
             console.log("datos guardados con exito");
@@ -117,8 +117,8 @@ rutas.controller('pagosController', function($scope, $http, socket)
         //actualizando tabla folios incrementando a 1 cada vez
         $http({
             method:"put",
-            url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar/1",
-            //url: "http://agua.dev/folios/actualizar/"+$id,
+            //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar/1",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
@@ -132,12 +132,12 @@ rutas.controller('pagosController', function($scope, $http, socket)
     $scope.cartapago = function($numero)
     {
         
-        socket.emit("pagocarta", "P"+$numero);
+        socket.emit("pagocarta","P"+$numero);
         //agregando numero a la tabla tikets
          $http({
             method:"post",
-            //url: "http://agua.dev/tikets",
-            url: "http://192.168.1.57:8080/turnomatic/public/tikets",
+            url: "http://localhost/turnomatic/public/tikets",
+            //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
             data: ({'turno' : $numero, 'id_sucursal' : '1' , 'estado' :  '0', 'asunto' : 'Pago carta no adeudo', 'subasunto' : 'Pago'})
         }).success(function(data){
             console.log("datos guardados con exito");
@@ -148,8 +148,8 @@ rutas.controller('pagosController', function($scope, $http, socket)
         //actualizando tabla folios incrementando a 1 cada vez
         $http({
             method:"put",
-            url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar/1",
-            //url: "http://agua.dev/folios/actualizar/"+$id,
+            //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar/1",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
@@ -167,8 +167,8 @@ rutas.controller('tramitesController', function($scope, $http, socket)
     //trayendo folios
     $http({
         method:"get",
-        url: "http://192.168.1.57:8080/turnomatic/public/folios/aclaraciones/1"
-        //url:"http://agua.dev/folios"
+        //url: "http://192.168.1.57:8080/turnomatic/public/folios/aclaraciones/1"
+        url: "http://localhost/turnomatic/public/folios/aclaraciones/1"
     }).success(function(data)
     {
         //console.log(data);
@@ -181,12 +181,12 @@ rutas.controller('tramitesController', function($scope, $http, socket)
     $scope.contratos = function($numero)
     {
         
-        socket.emit("contrato", "T"+$numero);
+        socket.emit("contrato","A"+$numero);
         //agregando numero a la tabla tikets
          $http({
             method:"post",
-            //url: "http://agua.dev/tikets",
-            url: "http://192.168.1.57:8080/turnomatic/public/tikets",
+            url: "http://localhost/turnomatic/public/tikets",
+            //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
             data: ({'turno' : $numero, 'id_sucursal' : '1' , 'estado' :  '0', 'asunto' : 'Contrato', 'subasunto' : 'Trámites'})
         }).success(function(data){
             console.log("datos guardados con exito");
@@ -197,8 +197,8 @@ rutas.controller('tramitesController', function($scope, $http, socket)
         //actualizando tabla folios incrementando a 1 cada vez
         $http({
             method:"put",
-            url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
-            //url: "http://agua.dev/folios/actualizar/"+$id,
+            //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/1",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
@@ -212,13 +212,13 @@ rutas.controller('tramitesController', function($scope, $http, socket)
     $scope.convenio = function($numero)
     {
 
-        socket.emit("convenio", "T"+$numero);
+        socket.emit("convenio","A"+$numero);
 
         //agregando numero a la tabla tikets
         $http({
             method:"post",
-            //url: "http://agua.dev/tikets",
-            url: "http://192.168.1.57:8080/turnomatic/public/tikets",
+            url: "http://localhost/turnomatic/public/tikets",
+            //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
             data: ({'turno' : $numero, 'id_sucursal' : '1',  'estado' :  '0', 'asunto' : 'Convenio', 'subasunto' : 'Trámites' })
         }).success(function(data){
             console.log("datos guardados con exito");
@@ -229,8 +229,8 @@ rutas.controller('tramitesController', function($scope, $http, socket)
         //actualizando tabla folios incrementando a 1 cada vez
         $http({
             method:"put",
-            //url: "http://agua.dev/folios/actualizar/"+$id,
-            url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/1",
+            //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
@@ -245,12 +245,12 @@ rutas.controller('tramitesController', function($scope, $http, socket)
     $scope.cambio_nombre = function($numero)
     {
 
-        socket.emit("cambio", "T"+$numero);
+        socket.emit("cambio", "A"+$numero);
         //agregando numero a la tabla tikets
         $http({
             method:"post",
-            url: "http://192.168.1.57:8080/turnomatic/public/tikets",
-            //url: "http://agua.dev/tikets",
+            //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
+            url: "http://localhost/turnomatic/public/tikets",
             data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Cambio de nombre', 'subasunto' : 'Trámites' })
         }).success(function(data){
             console.log("datos guardados con exito");
@@ -261,8 +261,8 @@ rutas.controller('tramitesController', function($scope, $http, socket)
         //actualizando tabla folios incrementando a 1 cada vez
         $http({
             method:"put",
-            url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
-            //url: "http://agua.dev/folios/actualizar/"+$id,
+            //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/1",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
@@ -276,13 +276,13 @@ rutas.controller('tramitesController', function($scope, $http, socket)
     $scope.carta_adeudo = function($numero)
     {
 
-        socket.emit("carta", "T"+$numero);
+        socket.emit("carta", "A"+$numero);
 
         //agregando numero a la tabla tikets
         $http({
             method:"post",
-            url: "http://192.168.1.57:8080/turnomatic/public/tikets",
-            //url: "http://agua.dev/tikets",
+            //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
+            url: "http://localhost/turnomatic/public/tikets",
             data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Carta de adeudo', 'subasunto' : 'Trámites' })
         }).success(function(data){
             console.log("datos guardados con exito");
@@ -293,8 +293,8 @@ rutas.controller('tramitesController', function($scope, $http, socket)
         //actualizando tabla folios incrementando a 1 cada vez
         $http({
             method:"put",
-            url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
-            //url: "http://agua.dev/folios/actualizar/"+$id,
+            //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/1",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
@@ -308,13 +308,13 @@ rutas.controller('tramitesController', function($scope, $http, socket)
     $scope.factibilidad = function($numero)
     {
 
-        socket.emit("factibilidad", "T"+$numero);
+        socket.emit("factibilidad","A"+$numero);
 
         //agregando numero a la tabla tikets
         $http({
             method:"post",
-            url: "http://192.168.1.57:8080/turnomatic/public/tikets",
-            //url: "http://agua.dev/tikets",
+            //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
+            url: "http://localhost/turnomatic/public/tikets",
             data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Factibilidad', 'subasunto' : 'Trámites' })
         }).success(function(data){
             console.log("datos guardados con exito");
@@ -325,8 +325,8 @@ rutas.controller('tramitesController', function($scope, $http, socket)
         //actualizando tabla folios incrementando a 1 cada vez
         $http({
             method:"put",
-            url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
-            //url: "http://agua.dev/folios/actualizar/"+$id,
+            //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/1",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
@@ -341,12 +341,12 @@ rutas.controller('tramitesController', function($scope, $http, socket)
     {
         
         //alert($numero);
-        socket.emit("pdf", "T"+$numero);
+        socket.emit("pdf", "A"+$numero);
         //agregando numero a la tabla tikets
         $http({
             method:"post",
-            //url: "http://agua.dev/tikets",
-            url: "http://192.168.1.57:8080/turnomatic/public/tikets",
+            url: "http://localhost/turnomatic/public/tikets",
+            //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
             data: ({'turno' : $numero , 'id_sucursal' : '1' , 'estado' :  '0', 'asunto' : '2 ó más trámites', 'subasunto' : 'Trámites' })
         }).success(function(data){
             console.log("datos guardados con exito");
@@ -357,8 +357,8 @@ rutas.controller('tramitesController', function($scope, $http, socket)
         //actualizando tabla folios incrementando a 1 cada vez
         $http({
             method:"put",
-            //url: "http://agua.dev/folios/actualizar/"+$id,
-            url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/1",
+            //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
@@ -376,8 +376,8 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
     //trayendo folios
     $http({
         method:"get",
-        url: "http://192.168.1.57:8080/turnomatic/public/folios/aclaraciones/1"
-        //url:"http://agua.dev/folios"
+        //url: "http://192.168.1.57:8080/turnomatic/public/folios/aclaraciones/1"
+        url: "http://localhost/turnomatic/public/folios/aclaraciones/1"
     }).success(function(data)
     {
         //console.log(data);
@@ -394,8 +394,8 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         //agregando numero a la tabla tikets
         $http({
             method:"post",
-            url: "http://192.168.1.57:8080/turnomatic/public/tikets",
-            //url: "http://agua.dev/tikets",
+            //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
+            url: "http://localhost/turnomatic/public/tikets",
             data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Alto consumo (con y sin medidor)', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
@@ -406,8 +406,8 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         //actualizando tabla folios incrementando a 1 cada vez
         $http({
             method:"put",
-            url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
-            //url: "http://agua.dev/folios/actualizar/"+$id,
+            //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/1",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
@@ -426,8 +426,8 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         //agregando numero a la tabla tikets
         $http({
             method:"post",
-            url: "http://192.168.1.57:8080/turnomatic/public/tikets",
-            //url: "http://agua.dev/tikets",
+            //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
+            url: "http://localhost/turnomatic/public/tikets",
             data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Reconexión de servicio', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
@@ -438,8 +438,8 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         //actualizando tabla folios incrementando a 1 cada vez
         $http({
             method:"put",
-            url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
-            //url: "http://agua.dev/folios/actualizar/"+$id,
+            //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/1",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
@@ -458,8 +458,8 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         //agregando numero a la tabla tikets
         $http({
             method:"post",
-            url: "http://192.168.1.57:8080/turnomatic/public/tikets",
-            //url: "http://agua.dev/tikets",
+            //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
+            url: "http://localhost/turnomatic/public/tikets",
             data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Error en lectura', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
@@ -470,8 +470,8 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         //actualizando tabla folios incrementando a 1 cada vez
         $http({
             method:"put",
-            url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
-            //url: "http://agua.dev/folios/actualizar/"+$id,
+            //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/1",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
@@ -490,8 +490,8 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         //agregando numero a la tabla tikets
         $http({
             method:"post",
-            url: "http://192.168.1.57:8080/turnomatic/public/tikets",
-            //url: "http://agua.dev/tikets",
+            //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
+            url: "http://localhost/turnomatic/public/tikets",
             data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'No toma lectura', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
@@ -502,8 +502,8 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         //actualizando tabla folios incrementando a 1 cada vez
         $http({
             method:"put",
-            url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
-            //url: "http://agua.dev/folios/actualizar/"+$id,
+            //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/1",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
@@ -522,8 +522,8 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         //agregando numero a la tabla tikets
         $http({
             method:"post",
-            url: "http://192.168.1.57:8080/turnomatic/public/tikets",
-            //url: "http://agua.dev/tikets",
+            //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
+            url: "http://localhost/turnomatic/public/tikets",
             data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'No entrega de recibo', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
@@ -534,8 +534,8 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         //actualizando tabla folios incrementando a 1 cada vez
         $http({
             method:"put",
-            url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
-            //url: "http://agua.dev/folios/actualizar/"+$id,
+            //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/1",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
@@ -554,8 +554,8 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         //agregando numero a la tabla tikets
         $http({
             method:"post",
-            url: "http://192.168.1.57:8080/turnomatic/public/tikets",
-            //url: "http://agua.dev/tikets",
+            //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
+            url: "http://localhost/turnomatic/public/tikets",
             data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Cambio de tarifa', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
@@ -566,8 +566,8 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         //actualizando tabla folios incrementando a 1 cada vez
         $http({
             method:"put",
-            url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
-            //url: "http://agua.dev/folios/actualizar/"+$id,
+            //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/1",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
@@ -587,8 +587,8 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         //agregando numero a la tabla tikets
         $http({
             method:"post",
-            url: "http://192.168.1.57:8080/turnomatic/public/tikets",
-            //url: "http://agua.dev/tikets",
+            //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
+            url: "http://localhost/turnomatic/public/tikets",
             data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Solicitud de medidor', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
@@ -599,8 +599,8 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         //actualizando tabla folios incrementando a 1 cada vez
         $http({
             method:"put",
-            url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
-            //url: "http://agua.dev/folios/actualizar/"+$id,
+            //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/1",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
@@ -619,8 +619,8 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         //agregando numero a la tabla tikets
         $http({
             method:"post",
-            url: "http://192.168.1.57:8080/turnomatic/public/tikets",
-            //url: "http://agua.dev/tikets",
+            //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
+            url: "http://localhost/turnomatic/public/tikets",
             data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Otros trámites', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
@@ -631,8 +631,8 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         //actualizando tabla folios incrementando a 1 cada vez
         $http({
             method:"put",
-            url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
-            //url: "http://agua.dev/folios/actualizar/"+$id,
+            //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/1",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
