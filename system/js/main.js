@@ -47,18 +47,31 @@ rutas.factory('socket',['$rootScope', function(){
     };
 }]);
 
+rutas.factory('socketimprimir',['$rootScope', function(){
+    var socket = io.connect('http://localhost:8080');
+    return{
+        on: function(eventName, callback){
+            socket.on(eventName, callback);
+        },
+        emit:function(eventName,data){
+            socket.emit(eventName,data);
+        }
+    };
+}]);
+
 //controlador 
 rutas.controller('inicioController', function($scope) 
 {
    
 });
+
 rutas.controller('pagosController', function($scope, $http, socket) 
 {
     //trayendo folios
     $http({
         method:"get",
         //url: "http://192.168.1.57:8080/turnomatic/public/folios/pagos/1"
-        url: "http://localhost/turnomatic/public/folios/pagos/1"
+        url: "http://localhost/turnomatic/public/folios/pagos/2"
     }).success(function(data)
     {
         //console.log(data);
@@ -76,7 +89,7 @@ rutas.controller('pagosController', function($scope, $http, socket)
             method:"post",
             //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
             url: "http://localhost/turnomatic/public/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1' , 'estado' :  '0', 'asunto' : 'Pago', 'subasunto' : 'Pago'})
+            data: ({'turno' : $numero, 'id_sucursal' : '2' , 'estado' :  '0', 'asunto' : 'Pago', 'subasunto' : 'Pago'})
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -87,12 +100,12 @@ rutas.controller('pagosController', function($scope, $http, socket)
         $http({
             method:"put",
             //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar/1",
-            url: "http://localhost/turnomatic/public/folios/actualizar/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar/2",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
                 window.location.href = '#/final';
-                socket.emit("imprimir");
+                //socket.emit("imprimir");
         }).error(function(data){
             console.log("Ha ocurrido un error al actualizar los datos");
                 //console.log(id);
@@ -107,7 +120,7 @@ rutas.controller('pagosController', function($scope, $http, socket)
             method:"post",
             url: "http://localhost/turnomatic/public/tikets",
             //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1' , 'estado' :  '0', 'asunto' : 'Pago de convenio', 'subasunto' : 'Pago'})
+            data: ({'turno' : $numero, 'id_sucursal' : '2' , 'estado' :  '0', 'asunto' : 'Pago de convenio', 'subasunto' : 'Pago'})
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -118,12 +131,12 @@ rutas.controller('pagosController', function($scope, $http, socket)
         $http({
             method:"put",
             //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar/1",
-            url: "http://localhost/turnomatic/public/folios/actualizar/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar/2",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
                 window.location.href = '#/final';
-                socket.emit("imprimir");
+                //socket.emit("imprimir");
         }).error(function(data){
             console.log("Ha ocurrido un error al actualizar los datos");
                 //console.log(id);
@@ -138,7 +151,7 @@ rutas.controller('pagosController', function($scope, $http, socket)
             method:"post",
             url: "http://localhost/turnomatic/public/tikets",
             //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1' , 'estado' :  '0', 'asunto' : 'Pago carta no adeudo', 'subasunto' : 'Pago'})
+            data: ({'turno' : $numero, 'id_sucursal' : '2' , 'estado' :  '0', 'asunto' : 'Pago carta no adeudo', 'subasunto' : 'Pago'})
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -149,12 +162,12 @@ rutas.controller('pagosController', function($scope, $http, socket)
         $http({
             method:"put",
             //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar/1",
-            url: "http://localhost/turnomatic/public/folios/actualizar/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar/2",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
                 window.location.href = '#/final';
-                socket.emit("imprimir");
+                //socket.emit("imprimir");
         }).error(function(data){
             console.log("Ha ocurrido un error al actualizar los datos");
                 //console.log(id);
@@ -168,7 +181,7 @@ rutas.controller('tramitesController', function($scope, $http, socket)
     $http({
         method:"get",
         //url: "http://192.168.1.57:8080/turnomatic/public/folios/aclaraciones/1"
-        url: "http://localhost/turnomatic/public/folios/aclaraciones/1"
+        url: "http://localhost/turnomatic/public/folios/aclaraciones/2"
     }).success(function(data)
     {
         //console.log(data);
@@ -187,7 +200,7 @@ rutas.controller('tramitesController', function($scope, $http, socket)
             method:"post",
             url: "http://localhost/turnomatic/public/tikets",
             //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1' , 'estado' :  '0', 'asunto' : 'Contrato', 'subasunto' : 'Trámites'})
+            data: ({'turno' : $numero, 'id_sucursal' : '2' , 'estado' :  '0', 'asunto' : 'Contrato', 'subasunto' : 'Trámites'})
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -198,12 +211,12 @@ rutas.controller('tramitesController', function($scope, $http, socket)
         $http({
             method:"put",
             //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
-            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/2",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
                 window.location.href = '#/final';
-                socket.emit("imprimir");
+                //socket.emit("imprimir");
         }).error(function(data){
             console.log("Ha ocurrido un error al actualizar los datos");
                 //console.log(id);
@@ -219,7 +232,7 @@ rutas.controller('tramitesController', function($scope, $http, socket)
             method:"post",
             url: "http://localhost/turnomatic/public/tikets",
             //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1',  'estado' :  '0', 'asunto' : 'Convenio', 'subasunto' : 'Trámites' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2',  'estado' :  '0', 'asunto' : 'Convenio', 'subasunto' : 'Trámites' })
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -229,13 +242,13 @@ rutas.controller('tramitesController', function($scope, $http, socket)
         //actualizando tabla folios incrementando a 1 cada vez
         $http({
             method:"put",
-            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/2",
             //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
                 window.location.href = '#/final';
-                socket.emit("imprimir");
+                //socket.emit("imprimir");
         }).error(function(data){
             console.log("Ha ocurrido un error al actualizar los datos");
                 //console.log(id);
@@ -251,7 +264,7 @@ rutas.controller('tramitesController', function($scope, $http, socket)
             method:"post",
             //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
             url: "http://localhost/turnomatic/public/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Cambio de nombre', 'subasunto' : 'Trámites' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'Cambio de nombre', 'subasunto' : 'Trámites' })
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -262,12 +275,12 @@ rutas.controller('tramitesController', function($scope, $http, socket)
         $http({
             method:"put",
             //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
-            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/2",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
                 window.location.href = '#/final';
-                socket.emit("imprimir");
+                //socket.emit("imprimir");
         }).error(function(data){
             console.log("Ha ocurrido un error al actualizar los datos");
                 //console.log(id);
@@ -283,7 +296,7 @@ rutas.controller('tramitesController', function($scope, $http, socket)
             method:"post",
             //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
             url: "http://localhost/turnomatic/public/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Carta de adeudo', 'subasunto' : 'Trámites' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'Carta de adeudo', 'subasunto' : 'Trámites' })
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -294,12 +307,12 @@ rutas.controller('tramitesController', function($scope, $http, socket)
         $http({
             method:"put",
             //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
-            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/2",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
                 window.location.href = '#/final';
-                socket.emit("imprimir");
+                //socket.emit("imprimir");
         }).error(function(data){
             console.log("Ha ocurrido un error al actualizar los datos");
                 //console.log(id);
@@ -315,7 +328,7 @@ rutas.controller('tramitesController', function($scope, $http, socket)
             method:"post",
             //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
             url: "http://localhost/turnomatic/public/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Factibilidad', 'subasunto' : 'Trámites' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'Factibilidad', 'subasunto' : 'Trámites' })
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -326,12 +339,12 @@ rutas.controller('tramitesController', function($scope, $http, socket)
         $http({
             method:"put",
             //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
-            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/2",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
                 window.location.href = '#/final';
-                socket.emit("imprimir");
+                //socket.emit("imprimir");
         }).error(function(data){
             console.log("Ha ocurrido un error al actualizar los datos");
                 //console.log(id);
@@ -347,7 +360,7 @@ rutas.controller('tramitesController', function($scope, $http, socket)
             method:"post",
             url: "http://localhost/turnomatic/public/tikets",
             //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
-            data: ({'turno' : $numero , 'id_sucursal' : '1' , 'estado' :  '0', 'asunto' : '2 ó más trámites', 'subasunto' : 'Trámites' })
+            data: ({'turno' : $numero , 'id_sucursal' : '2' , 'estado' :  '0', 'asunto' : '2 ó más trámites', 'subasunto' : 'Trámites' })
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -357,13 +370,13 @@ rutas.controller('tramitesController', function($scope, $http, socket)
         //actualizando tabla folios incrementando a 1 cada vez
         $http({
             method:"put",
-            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/2",
             //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
                 window.location.href = '#/final';
-                socket.emit("imprimir");
+                //socket.emit("imprimir");
         }).error(function(data){
             console.log("Ha ocurrido un error al actualizar los datos");
                 //console.log(id);
@@ -377,7 +390,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
     $http({
         method:"get",
         //url: "http://192.168.1.57:8080/turnomatic/public/folios/aclaraciones/1"
-        url: "http://localhost/turnomatic/public/folios/aclaraciones/1"
+        url: "http://localhost/turnomatic/public/folios/aclaraciones/2"
     }).success(function(data)
     {
         //console.log(data);
@@ -396,7 +409,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
             method:"post",
             //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
             url: "http://localhost/turnomatic/public/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Alto consumo (con y sin medidor)', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'Alto consumo (con y sin medidor)', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -407,12 +420,12 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         $http({
             method:"put",
             //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
-            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/2",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
                 window.location.href = '#/final';
-                socket.emit("imprimir");
+                //socket.emit("imprimir");
         }).error(function(data){
             console.log("Ha ocurrido un error al actualizar los datos");
                 //console.log(id);
@@ -428,7 +441,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
             method:"post",
             //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
             url: "http://localhost/turnomatic/public/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Reconexión de servicio', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'Reconexión de servicio', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -439,12 +452,12 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         $http({
             method:"put",
             //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
-            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/2",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
                 window.location.href = '#/final';
-                socket.emit("imprimir");
+                //socket.emit("imprimir");
         }).error(function(data){
             console.log("Ha ocurrido un error al actualizar los datos");
                 //console.log(id);
@@ -460,7 +473,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
             method:"post",
             //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
             url: "http://localhost/turnomatic/public/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Error en lectura', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'Error en lectura', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -471,12 +484,12 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         $http({
             method:"put",
             //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
-            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/2",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
                 window.location.href = '#/final';
-                socket.emit("imprimir");
+                //socket.emit("imprimir");
         }).error(function(data){
             console.log("Ha ocurrido un error al actualizar los datos");
                 //console.log(id);
@@ -492,7 +505,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
             method:"post",
             //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
             url: "http://localhost/turnomatic/public/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'No toma lectura', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'No toma lectura', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -503,12 +516,12 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         $http({
             method:"put",
             //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
-            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/2",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
                 window.location.href = '#/final';
-                socket.emit("imprimir");
+                //socket.emit("imprimir");
         }).error(function(data){
             console.log("Ha ocurrido un error al actualizar los datos");
                 //console.log(id);
@@ -524,7 +537,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
             method:"post",
             //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
             url: "http://localhost/turnomatic/public/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'No entrega de recibo', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'No entrega de recibo', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -535,12 +548,12 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         $http({
             method:"put",
             //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
-            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/2",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
                 window.location.href = '#/final';
-                socket.emit("imprimir");
+                //socket.emit("imprimir");
         }).error(function(data){
             console.log("Ha ocurrido un error al actualizar los datos");
                 //console.log(id);
@@ -556,7 +569,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
             method:"post",
             //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
             url: "http://localhost/turnomatic/public/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Cambio de tarifa', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'Cambio de tarifa', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -567,12 +580,12 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         $http({
             method:"put",
             //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
-            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/2",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
                 window.location.href = '#/final';
-                socket.emit("imprimir");
+                //socket.emit("imprimir");
         }).error(function(data){
             console.log("Ha ocurrido un error al actualizar los datos");
                 //console.log(id);
@@ -589,7 +602,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
             method:"post",
             //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
             url: "http://localhost/turnomatic/public/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Solicitud de medidor', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'Solicitud de medidor', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -600,12 +613,12 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         $http({
             method:"put",
             //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
-            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/2",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
                 window.location.href = '#/final';
-                socket.emit("imprimir");
+                //socket.emit("imprimir");
         }).error(function(data){
             console.log("Ha ocurrido un error al actualizar los datos");
                 //console.log(id);
@@ -621,7 +634,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
             method:"post",
             //url: "http://192.168.1.57:8080/turnomatic/public/tikets",
             url: "http://localhost/turnomatic/public/tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Otros trámites', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'Otros trámites', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
         }).error(function(data){
@@ -632,12 +645,12 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
         $http({
             method:"put",
             //url: "http://192.168.1.57:8080/turnomatic/public/folios/actualizar_aclaraciones/1",
-            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/1",
+            url: "http://localhost/turnomatic/public/folios/actualizar_aclaraciones/2",
             data: ({ 'numero' : $numero })
         }).success(function(data){
                 //alert("Datos actualizados con exito");
                 window.location.href = '#/final';
-                socket.emit("imprimir");
+                //socket.emit("imprimir");
         }).error(function(data){
             console.log("Ha ocurrido un error al actualizar los datos");
                 //console.log(id);
@@ -645,3 +658,8 @@ rutas.controller('aclaracionesController', function($scope, $http, socket)
     }
     /*Fin de aclaraciones */
 });
+rutas.controller('finalController', function($scope, socketimprimir) 
+{
+    socketimprimir.emit("imprimir");
+});
+
