@@ -59,12 +59,11 @@ rutas.controller('pagosController', function($scope, $http, socket, $route)
     //trayendo folios
     $http({
         method:"get",
-        url: "http://localhost/turnomatic/public/api/pagos/1"
+        url: "http://192.168.1.57:8080/turnomatic/public/api/pagos/2"
         //url: "http://192.168.1.57:8080/turnomatic/public/ folios/pagos/2"
     }).success(function(data)
     {
         $("#cargando").hide();
-        
         //console.log(data);
         $scope.datos=data;
     }).error(function(data){
@@ -78,9 +77,9 @@ rutas.controller('pagosController', function($scope, $http, socket, $route)
        	//agregando numero a la tabla tikets
         $http({
             method:"post",
-            url: "http://localhost/turnomatic/public/api/tikets_pago",
+            url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_pago",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1' , 'estado' :  '0', 'asunto' : 'Pago', 'subasunto' : 'Pago'})
+            data: ({'turno' : $numero, 'id_sucursal' : '2' , 'estado' :  '0', 'asunto' : 'Pago', 'subasunto' : 'Pago'})
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");    
@@ -100,7 +99,7 @@ rutas.controller('pagosController', function($scope, $http, socket, $route)
             method:"post",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_pago",
-            data: ({'turno' : $numero, 'id_sucursal' : '1' , 'estado' :  '0', 'asunto' : 'Pago de convenio', 'subasunto' : 'Pago'})
+            data: ({'turno' : $numero, 'id_sucursal' : '2' , 'estado' :  '0', 'asunto' : 'Pago de convenio', 'subasunto' : 'Pago'})
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -118,7 +117,7 @@ rutas.controller('pagosController', function($scope, $http, socket, $route)
             method:"post",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_pago",
-            data: ({'turno' : $numero, 'id_sucursal' : '1' , 'estado' :  '0', 'asunto' : 'Pago carta no adeudo', 'subasunto' : 'Pago'})
+            data: ({'turno' : $numero, 'id_sucursal' : '2' , 'estado' :  '0', 'asunto' : 'Pago carta no adeudo', 'subasunto' : 'Pago'})
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -134,7 +133,7 @@ rutas.controller('tramitesController', function($scope, $http, socket, $route)
     //trayendo folios
     $http({
         method:"get",
-        url: "http://localhost/turnomatic/public/api/aclaraciones/1"
+        url: "http://192.168.1.57:8080/turnomatic/public/api/aclaraciones/2"
         //url: "http://192.168.1.57:8080/turnomatic/public/ folios/aclaraciones/2"
     }).success(function(data)
     {
@@ -157,7 +156,7 @@ rutas.controller('tramitesController', function($scope, $http, socket, $route)
             method:"post",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_aclaraciones",
-            data: ({'turno' : $numero, 'id_sucursal' : '1' , 'estado' :  '0', 'asunto' : 'Contrato', 'subasunto' : 'Trámites'})
+            data: ({'turno' : $numero, 'id_sucursal' : '2' , 'estado' :  '0', 'asunto' : 'Contrato', 'subasunto' : 'Tramites'})
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -179,8 +178,8 @@ rutas.controller('tramitesController', function($scope, $http, socket, $route)
         $http({
             method:"post",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
-            url: "http://localhost/turnomatic/public/api/tikets_aclaraciones",
-            data: ({'turno' : $numero, 'id_sucursal' : '1',  'estado' :  '0', 'asunto' : 'Convenio', 'subasunto' : 'Trámites' })
+            url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_aclaraciones",
+            data: ({'turno' : $numero, 'id_sucursal' : '2',  'estado' :  '0', 'asunto' : 'Convenio', 'subasunto' : 'Tramites' })
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -200,7 +199,7 @@ rutas.controller('tramitesController', function($scope, $http, socket, $route)
             method:"post",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_aclaraciones",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Cambio de nombre', 'subasunto' : 'Trámites' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'Cambio de nombre', 'subasunto' : 'Tramites' })
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -223,7 +222,7 @@ rutas.controller('tramitesController', function($scope, $http, socket, $route)
             method:"post",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_aclaraciones",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Carta de adeudo', 'subasunto' : 'Trámites' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'Carta de adeudo', 'subasunto' : 'Tramites' })
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -244,7 +243,7 @@ rutas.controller('tramitesController', function($scope, $http, socket, $route)
             method:"post",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_aclaraciones",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Factibilidad', 'subasunto' : 'Trámites' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'Factibilidad', 'subasunto' : 'Tramites' })
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -265,7 +264,7 @@ rutas.controller('tramitesController', function($scope, $http, socket, $route)
             method:"post",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_aclaraciones",
-            data: ({'turno' : $numero , 'id_sucursal' : '1' , 'estado' :  '0', 'asunto' : '2 ó más trámites', 'subasunto' : 'Trámites' })
+            data: ({'turno' : $numero , 'id_sucursal' : '2' , 'estado' :  '0', 'asunto' : '2 ó más Tramites', 'subasunto' : 'Tramites' })
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -283,7 +282,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket, $rout
     //trayendo folios
     $http({
         method:"get",
-        url: "http://localhost/turnomatic/public/api/aclaraciones/1"
+        url: "http://192.168.1.57:8080/turnomatic/public/api/aclaraciones/2"
         //url: "http://192.168.1.57:8080/turnomatic/public/ folios/aclaraciones/2"
     }).success(function(data)
     {
@@ -305,7 +304,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket, $rout
             method:"post",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_aclaraciones",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Alto consumo (con y sin medidor)', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'Alto consumo (con y sin medidor)', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -326,7 +325,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket, $rout
             method:"post",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_aclaraciones",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Reconexión de servicio', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'Reconexión de servicio', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -345,7 +344,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket, $rout
             method:"post",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_aclaraciones",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Error en lectura', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'Error en lectura', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -366,7 +365,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket, $rout
             method:"post",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_aclaraciones",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'No toma lectura', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'No toma lectura', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -387,7 +386,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket, $rout
             method:"post",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_aclaraciones",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'No entrega de recibo', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'No entrega de recibo', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -407,7 +406,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket, $rout
             method:"post",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_aclaraciones",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Cambio de tarifa', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'Cambio de tarifa', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -428,7 +427,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket, $rout
             method:"post",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_aclaraciones",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Solicitud de medidor', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'Solicitud de medidor', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -449,7 +448,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket, $rout
             method:"post",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_aclaraciones",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '1', 'estado' :  '0', 'asunto' : 'Otros trámites', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'Otros Tramites', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
            	socket.emit("imprimir");
