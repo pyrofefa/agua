@@ -7,8 +7,10 @@
 		</div>
 	</div>
 	<div class="row" style="width:850px; position: absolute; left: 120px; top: 270px;">
-		<div class="col-md-4" ng-click="pagos(data.numero)">
-			<img src="img/btnpago.png">
+		<div ng-disabled="recibo">
+			<div class="col-md-4" ng-click="pagos(data.numero)">
+				<img src="img/btnpago.png">
+			</div>
 		</div>
 		<div class="col-md-4" ng-click="conveniopago(data.numero)">
 			<img src="img/btnconveniopago.png">
