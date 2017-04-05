@@ -78,13 +78,20 @@ rutas.controller('pagosController', function($scope, $http, socket, $route)
         $("#cargando").show();
         $("#pagos").hide();
         socket.emit("pago","P"+$numero);
-       	//agregando numero a la tabla tikets
+       	
+        var datetimeNow = new Date();
+        var hourNow = datetimeNow.getHours();
+        var minuteNow = datetimeNow.getMinutes();
+        var secondsNow = datetimeNow.getSeconds();
+        var llegada = hourNow+':'+minuteNow+':'+secondsNow;
+
+        //agregando numero a la tabla tikets
         //alert();
         $http({
             method:"post",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_pago",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '2' , 'estado' :  '0', 'asunto' : 'Pago', 'subasunto' : 'Pago'})
+            data: ({'turno' : $numero, 'id_sucursal' : '2' , 'estado' :  '0', 'llegada' : llegada, 'asunto' : 'Pago', 'subasunto' : 'Pago'})
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");    
@@ -102,12 +109,19 @@ rutas.controller('pagosController', function($scope, $http, socket, $route)
         $("#cargando").show();
         $("#pagos").hide();
         socket.emit("pagoconvenio", "P"+$numero);
+
+        var datetimeNow = new Date();
+        var hourNow = datetimeNow.getHours();
+        var minuteNow = datetimeNow.getMinutes();
+        var secondsNow = datetimeNow.getSeconds();
+        var llegada = hourNow+':'+minuteNow+':'+secondsNow;
+
         //agregando numero a la tabla tikets
-         $http({
+        $http({
             method:"post",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_pago",
-            data: ({'turno' : $numero, 'id_sucursal' : '2' , 'estado' :  '0', 'asunto' : 'Pago de convenio', 'subasunto' : 'Pago'})
+            data: ({'turno' : $numero, 'id_sucursal' : '2' , 'estado' :  '0', 'llegada' : llegada, 'asunto' : 'Pago de convenio', 'subasunto' : 'Pago'})
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -124,12 +138,19 @@ rutas.controller('pagosController', function($scope, $http, socket, $route)
         $("#cargando").show();
         $("#pagos").hide();
         socket.emit("pagocarta","P"+$numero);
+
+        var datetimeNow = new Date();
+        var hourNow = datetimeNow.getHours();
+        var minuteNow = datetimeNow.getMinutes();
+        var secondsNow = datetimeNow.getSeconds();
+        var llegada = hourNow+':'+minuteNow+':'+secondsNow;
+        
         //agregando numero a la tabla tikets
          $http({
             method:"post",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_pago",
-            data: ({'turno' : $numero, 'id_sucursal' : '2' , 'estado' :  '0', 'asunto' : 'Pago carta no adeudo', 'subasunto' : 'Pago'})
+            data: ({'turno' : $numero, 'id_sucursal' : '2' , 'estado' :  '0', 'llegada' : llegada, 'asunto' : 'Pago carta no adeudo', 'subasunto' : 'Pago'})
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -168,12 +189,19 @@ rutas.controller('tramitesController', function($scope, $http, socket, $route)
         $("#cargando").show();
         $("#tramites").hide();
         socket.emit("contrato","A"+$numero);
+
+        var datetimeNow = new Date();
+        var hourNow = datetimeNow.getHours();
+        var minuteNow = datetimeNow.getMinutes();
+        var secondsNow = datetimeNow.getSeconds();
+        var llegada = hourNow+':'+minuteNow+':'+secondsNow;
+
         //agregando numero a la tabla tikets
         $http({
             method:"post",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_aclaraciones",
-            data: ({'turno' : $numero, 'id_sucursal' : '2' , 'estado' :  '0', 'asunto' : 'Contrato', 'subasunto' : 'Tramites'})
+            data: ({'turno' : $numero, 'id_sucursal' : '2' , 'estado' :  '0', 'llegada' : llegada, 'asunto' : 'Contrato', 'subasunto' : 'Tramites'})
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -191,13 +219,19 @@ rutas.controller('tramitesController', function($scope, $http, socket, $route)
         $("#cargando").show();
         $("#tramites").hide();
         socket.emit("convenio","A"+$numero);
+
+        var datetimeNow = new Date();
+        var hourNow = datetimeNow.getHours();
+        var minuteNow = datetimeNow.getMinutes();
+        var secondsNow = datetimeNow.getSeconds();
+        var llegada = hourNow+':'+minuteNow+':'+secondsNow;
         //$('#cargando').show();
         //agregando numero a la tabla tikets
         $http({
             method:"post",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_aclaraciones",
-            data: ({'turno' : $numero, 'id_sucursal' : '2',  'estado' :  '0', 'asunto' : 'Convenio', 'subasunto' : 'Tramites' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2',  'estado' :  '0', 'llegada' : llegada, 'asunto' : 'Convenio', 'subasunto' : 'Tramites' })
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -214,12 +248,19 @@ rutas.controller('tramitesController', function($scope, $http, socket, $route)
         $("#cargando").show();
         $("#tramites").hide();
         socket.emit("cambio", "A"+$numero);
+
+        var datetimeNow = new Date();
+        var hourNow = datetimeNow.getHours();
+        var minuteNow = datetimeNow.getMinutes();
+        var secondsNow = datetimeNow.getSeconds();
+        var llegada = hourNow+':'+minuteNow+':'+secondsNow;
+        
         //agregando numero a la tabla tikets
         $http({
             method:"post",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_aclaraciones",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'Cambio de nombre', 'subasunto' : 'Tramites' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'llegada' : llegada, 'asunto' : 'Cambio de nombre', 'subasunto' : 'Tramites' })
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -236,12 +277,19 @@ rutas.controller('tramitesController', function($scope, $http, socket, $route)
         $("#cargando").show();
         $("#tramites").hide();
         socket.emit("carta", "A"+$numero);
+
+        var datetimeNow = new Date();
+        var hourNow = datetimeNow.getHours();
+        var minuteNow = datetimeNow.getMinutes();
+        var secondsNow = datetimeNow.getSeconds();
+        var llegada = hourNow+':'+minuteNow+':'+secondsNow;
+        
         //agregando numero a la tabla tikets
         $http({
             method:"post",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_aclaraciones",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'Carta de adeudo', 'subasunto' : 'Tramites' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'llegada' : llegada, 'asunto' : 'Carta de adeudo', 'subasunto' : 'Tramites' })
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -258,12 +306,19 @@ rutas.controller('tramitesController', function($scope, $http, socket, $route)
         $("#cargando").show();
         $("#tramites").hide();
         socket.emit("factibilidad","A"+$numero);
+
+        var datetimeNow = new Date();
+        var hourNow = datetimeNow.getHours();
+        var minuteNow = datetimeNow.getMinutes();
+        var secondsNow = datetimeNow.getSeconds();
+        var llegada = hourNow+':'+minuteNow+':'+secondsNow;
+
         //agregando numero a la tabla tikets
         $http({
             method:"post",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_aclaraciones",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'Factibilidad', 'subasunto' : 'Tramites' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'llegada' : llegada, 'asunto' : 'Factibilidad', 'subasunto' : 'Tramites' })
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -281,12 +336,19 @@ rutas.controller('tramitesController', function($scope, $http, socket, $route)
         $("#cargando").show();
         $("#tramites").hide();
         socket.emit("pdf", "A"+$numero);
+
+        var datetimeNow = new Date();
+        var hourNow = datetimeNow.getHours();
+        var minuteNow = datetimeNow.getMinutes();
+        var secondsNow = datetimeNow.getSeconds();
+        var llegada = hourNow+':'+minuteNow+':'+secondsNow;
+        
         //agregando numero a la tabla tikets
         $http({
             method:"post",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_aclaraciones",
-            data: ({'turno' : $numero , 'id_sucursal' : '2' , 'estado' :  '0', 'asunto' : '2 ?m? Tramites', 'subasunto' : 'Tramites' })
+            data: ({'turno' : $numero , 'id_sucursal' : '2' , 'estado' :  '0', 'llegada' : llegada, 'asunto' : '2 o mas tramites', 'subasunto' : 'Tramites' })
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -323,12 +385,19 @@ rutas.controller('aclaracionesController', function($scope, $http, socket, $rout
         $("#cargando").show();
         $("#aclaraciones").hide();
         socket.emit("alto_consumo", "A"+$numero);
+
+        var datetimeNow = new Date();
+        var hourNow = datetimeNow.getHours();
+        var minuteNow = datetimeNow.getMinutes();
+        var secondsNow = datetimeNow.getSeconds();
+        var llegada = hourNow+':'+minuteNow+':'+secondsNow;
+
         //agregando numero a la tabla tikets
         $http({
             method:"post",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_aclaraciones",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'Alto consumo (con y sin medidor)', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'llegada' : llegada, 'asunto' : 'Alto consumo (con y sin medidor)', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -345,12 +414,19 @@ rutas.controller('aclaracionesController', function($scope, $http, socket, $rout
         $("#cargando").show();
         $("#aclaraciones").hide();
         socket.emit("reconexion", "A"+$numero);
+
+        var datetimeNow = new Date();
+        var hourNow = datetimeNow.getHours();
+        var minuteNow = datetimeNow.getMinutes();
+        var secondsNow = datetimeNow.getSeconds();
+        var llegada = hourNow+':'+minuteNow+':'+secondsNow;
+
         //agregando numero a la tabla tikets
         $http({
             method:"post",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_aclaraciones",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'Reconexi? de servicio', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'llegada': llegada, 'asunto' : 'Reconexion de servicio', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -365,12 +441,19 @@ rutas.controller('aclaracionesController', function($scope, $http, socket, $rout
         $("#cargando").show();
         $("#aclaraciones").hide();
         socket.emit("error_lectura", "A"+$numero);
+
+        var datetimeNow = new Date();
+        var hourNow = datetimeNow.getHours();
+        var minuteNow = datetimeNow.getMinutes();
+        var secondsNow = datetimeNow.getSeconds();
+        var llegada = hourNow+':'+minuteNow+':'+secondsNow;
+
         //agregando numero a la tabla tikets
         $http({
             method:"post",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_aclaraciones",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'Error en lectura', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'llegada' : llegada, 'asunto' : 'Error en lectura', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -387,12 +470,19 @@ rutas.controller('aclaracionesController', function($scope, $http, socket, $rout
         $("#cargando").show();
         $("#aclaraciones").hide();
         socket.emit("no_toma_lectura", "A"+$numero);
+
+        var datetimeNow = new Date();
+        var hourNow = datetimeNow.getHours();
+        var minuteNow = datetimeNow.getMinutes();
+        var secondsNow = datetimeNow.getSeconds();
+        var llegada = hourNow+':'+minuteNow+':'+secondsNow;
+        
         //agregando numero a la tabla tikets
         $http({
             method:"post",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_aclaraciones",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'No toma lectura', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'llegada' : llegada, 'asunto' : 'No toma lectura', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -409,12 +499,19 @@ rutas.controller('aclaracionesController', function($scope, $http, socket, $rout
         $("#cargando").show();
         $("#aclaraciones").hide();
         socket.emit("no_entrega", "A"+$numero);
+
+        var datetimeNow = new Date();
+        var hourNow = datetimeNow.getHours();
+        var minuteNow = datetimeNow.getMinutes();
+        var secondsNow = datetimeNow.getSeconds();
+        var llegada = hourNow+':'+minuteNow+':'+secondsNow;
+        
         //agregando numero a la tabla tikets
         $http({
             method:"post",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_aclaraciones",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'No entrega de recibo', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'llegada' : llegada, 'asunto' : 'No entrega de recibo', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -431,12 +528,19 @@ rutas.controller('aclaracionesController', function($scope, $http, socket, $rout
         $("#cargando").show();
         $("#aclaraciones").hide();
         socket.emit("cambio_tarifa", "A"+$numero);
+
+        var datetimeNow = new Date();
+        var hourNow = datetimeNow.getHours();
+        var minuteNow = datetimeNow.getMinutes();
+        var secondsNow = datetimeNow.getSeconds();
+        var llegada = hourNow+':'+minuteNow+':'+secondsNow;
+        
         //agregando numero a la tabla tikets
         $http({
             method:"post",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_aclaraciones",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'Cambio de tarifa', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'llegada' : llegada, 'asunto' : 'Cambio de tarifa', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -453,12 +557,19 @@ rutas.controller('aclaracionesController', function($scope, $http, socket, $rout
         $("#cargando").show();
         $("#aclaraciones").hide();
         socket.emit("solicitud", "A"+$numero);
+
+        var datetimeNow = new Date();
+        var hourNow = datetimeNow.getHours();
+        var minuteNow = datetimeNow.getMinutes();
+        var secondsNow = datetimeNow.getSeconds();
+        var llegada = hourNow+':'+minuteNow+':'+secondsNow;
+        
         //agregando numero a la tabla tikets
         $http({
             method:"post",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_aclaraciones",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'Solicitud de medidor', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'llegada' : llegada, 'asunto' : 'Solicitud de medidor', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
             socket.emit("imprimir");
@@ -475,12 +586,19 @@ rutas.controller('aclaracionesController', function($scope, $http, socket, $rout
         $("#cargando").show();
         $("#aclaraciones").hide();
         socket.emit("otros", "A"+$numero);
+
+        var datetimeNow = new Date();
+        var hourNow = datetimeNow.getHours();
+        var minuteNow = datetimeNow.getMinutes();
+        var secondsNow = datetimeNow.getSeconds();
+        var llegada = hourNow+':'+minuteNow+':'+secondsNow;
+        
         //agregando numero a la tabla tikets
         $http({
             method:"post",
             url: "http://192.168.1.57:8080/turnomatic/public/api/tikets_aclaraciones",
             //url: "http://192.168.1.57:8080/turnomatic/public/ tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'asunto' : 'Otros Tramites', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '2', 'estado' :  '0', 'llegada' : llegada, 'asunto' : 'Otros tramites', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
            	socket.emit("imprimir");
