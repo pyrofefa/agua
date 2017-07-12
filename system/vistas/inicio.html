@@ -7,22 +7,31 @@
 	</div>
 	<br>
 	<div class="row" style="width:1024px; position: absolute; top: 400px; left: 10px;">
-		<div class="col-md-4">
-			<a href="#/pagos_tramites">
-			<br>
-				<h1 style="text-align: center;"><img src="img/tramites.png"></h1>
-			</a>
+		<div class="col-md-4" ng-controller="tramitesController">
+			<div ng-repeat="data in datos" id="tramites">
+				<a href="#/pagos_tramites">
+				<br>
+					<!--<p style="text-align: center;">{{data.numero}}</p>-->
+					<h1 style="text-align: center;"><img src="img/tramites.png"></h1>
+				</a>
+			</div>
 		</div>
-		<div class="col-md-4">
-			<a href="#/pago">
-				<h1 style="text-align: center;"><img src="img/pago.png"></h1>
-			</a>
+		<div class="col-md-4" ng-controller="pagosController">
+			<div ng-repeat="data in datos">
+				<a href="#/pago">
+					<!--<p style="text-align: center;">{{data.numero}}</p>-->
+					<h1 style="text-align: center;"><img src="img/pago.png"></h1>
+				</a>
+			</div>	
 		</div>
-		<div class="col-md-4">
-			<br>
-			<a href="#/aclaraciones_otros">
-				<h1 style="text-align: center;"><img src="img/aclaraciones.png"></h1>
-			</a>
+		<div class="col-md-4" ng-controller="aclaracionesController">
+			<div ng-repeat="data in datos">
+				<br>
+				<a href="#/aclaraciones_otros">
+					<!--<p style="text-align: center;">{{data.numero}}</p>-->
+					<h1 style="text-align: center;"><img src="img/aclaraciones.png"></h1>
+				</a>
+			</div>	
 		</div>
 	</div>	
 </div>
