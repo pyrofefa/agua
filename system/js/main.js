@@ -10,25 +10,11 @@ rutas.config(function($routeProvider) {
             templateUrl : 'vistas/inicio.html',
             controller  : 'inicioController'
         })
-       .when('/pagos_tramites', {
-            templateUrl : 'vistas/tramites.html',
-            controller  : 'tramitesController'
-        })
-        .when('/aclaraciones_otros', {
-            templateUrl : 'vistas/aclaraciones_otros.html',
-            controller  : 'aclaracionesController'
-        })
-        .when('/pago',{
-            templateUrl : 'vistas/pagos.html',
-            controller  : 'pagosController'
-
-        })
         .when('/final', {
             templateUrl : 'vistas/final.html',
             controller  : 'finalController'
 
         })
-        
         /*final*/  
         .otherwise({
             redirectTo: '/'
@@ -58,7 +44,7 @@ rutas.controller('pagosController', function($scope, $http, socket, $route)
     //trayendo folios
     $http({
         method:"get",
-        url: "http://localhost/turnomatic/public/api/pagos/2"
+        url: "http://localhost/turnomatic/public/api/pagos/1"
         //url: "http://192.168.1.57:8080/turnomatic/publicfolios/pagos/2"
     }).success(function(data)
     {
@@ -75,7 +61,7 @@ rutas.controller('pagosController', function($scope, $http, socket, $route)
     {
         
         $("#cargando").show();
-        $("#pagos").hide();
+        $("#opciones").hide();
         socket.emit("pago","P"+$numero);
        	
         //agregando numero a la tabla tikets
@@ -84,10 +70,10 @@ rutas.controller('pagosController', function($scope, $http, socket, $route)
             method:"post",
             url: "http://localhost/turnomatic/public/api/tikets_pago",
             //url: "http://192.168.1.57:8080/turnomatic/public tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '2', 'asunto' : 'Pago'})
+            data: ({'turno' : $numero, 'id_sucursal' : '1','asunto' : 'Seleccione', 'subasunto' : 'Pago'})
         }).success(function(data){
             console.log("datos guardados con exito");
-            socket.emit("imprimir");    
+            socket.emit("imprimir", { letra: 'P', numero : $numero, subasunto : 'pagos' });
 			$("#cargando").hide();
             window.location.href = '#/final';
         }).error(function(data){
@@ -95,54 +81,7 @@ rutas.controller('pagosController', function($scope, $http, socket, $route)
             $("#cargando").show();
             $route.reload();    
         })
-	
 	}
-    $scope.conveniopago = function($numero)
-    {
-        $("#cargando").show();
-        $("#pagos").hide();
-        socket.emit("pagoconvenio", "P"+$numero);
-
-        //agregando numero a la tabla tikets
-        $http({
-            method:"post",
-            //url: "http://192.168.1.57:8080/turnomatic/public tikets",
-            url: "http://localhost/turnomatic/public/api/tikets_pago",
-            data: ({'turno' : $numero, 'id_sucursal' : '2' , 'asunto' : 'Pago de convenio' })
-        }).success(function(data){
-            console.log("datos guardados con exito");
-            socket.emit("imprimir");
-            $("#cargando").hide();
-            window.location.href = '#/final';
-        }).error(function(data){
-            console.log("ha ocurrido un error en guardar los datos");
-            $("#cargando").show();
-            $route.reload();
-        })
-    }
-    $scope.cartapago = function($numero)
-    {
-        $("#cargando").show();
-        $("#pagos").hide();
-        socket.emit("pagocarta","P"+$numero);
-
-         //agregando numero a la tabla tikets
-        $http({
-            method:"post",
-            //url: "http://192.168.1.57:8080/turnomatic/public tikets",
-            url: "http://localhost/turnomatic/public/api/tikets_pago",
-            data: ({'turno' : $numero, 'id_sucursal' : '2' ,'asunto' : 'Pago carta no adeudo' })
-        }).success(function(data){
-            console.log("datos guardados con exito");
-            socket.emit("imprimir");
-            $("#cargando").hide();
-            window.location.href = '#/final';
-		}).error(function(data){
-            console.log("ha ocurrido un error en guardar los datos");
-            $("#cargando").show();
-            $route.reload();
-        })
-    }
 });
 rutas.controller('tramitesController', function($scope, $http, socket, $route) 
 {
@@ -151,7 +90,7 @@ rutas.controller('tramitesController', function($scope, $http, socket, $route)
     $("#cargando").show();
     $http({
         method:"get",
-        url: "http://localhost/turnomatic/public/api/aclaraciones/2"
+        url: "http://localhost/turnomatic/public/api/aclaraciones/1"
         //url: "http://192.168.1.57:8080/turnomatic/public folios/aclaraciones/2"
     }).success(function(data)
     {
@@ -163,23 +102,22 @@ rutas.controller('tramitesController', function($scope, $http, socket, $route)
         $("#cargando").show();
         $route.reload();
     });
-    
     /*Tramites*/
     $scope.contratos = function($numero)
     {
         $("#cargando").show();
-        $("#tramites").hide();
-        socket.emit("contrato","A"+$numero);
+        $("#opciones").hide();
+        socket.emit("pdf","A"+$numero);
 
         //agregando numero a la tabla tikets
         $http({
             method:"post",
             //url: "http://192.168.1.57:8080/turnomatic/public tikets",
             url: "http://localhost/turnomatic/public/api/tikets_aclaraciones",
-            data: ({'turno' : $numero, 'id_sucursal' : '2' ,'asunto' : 'Contrato', 'subasunto' : 'Tramites'})
+            data: ({'turno' : $numero, 'id_sucursal' : '1','asunto' : 'Seleccione' ,'subasunto' : 'Tramites'})
         }).success(function(data){
             console.log("datos guardados con exito");
-            socket.emit("imprimir");
+            socket.emit("imprimir", { letra: 'A', numero : $numero, subasunto : 'tramites' });
 			$("#cargando").hide();
             window.location.href = '#/final';
 		}).error(function(data){
@@ -188,132 +126,13 @@ rutas.controller('tramitesController', function($scope, $http, socket, $route)
             $route.reload();   
         })
     }
-    $scope.convenio = function($numero)
-    {
-
-        $("#cargando").show();
-        $("#tramites").hide();
-        socket.emit("convenio","A"+$numero);
-
-        //$('#cargando').show();
-        //agregando numero a la tabla tikets
-        $http({
-            method:"post",
-            //url: "http://192.168.1.57:8080/turnomatic/public tikets",
-            url: "http://localhost/turnomatic/public/api/tikets_aclaraciones",
-            data: ({'turno' : $numero, 'id_sucursal' : '2', 'asunto' : 'Convenio', 'subasunto' : 'Tramites' })
-        }).success(function(data){
-            console.log("datos guardados con exito");
-            socket.emit("imprimir");
-            $("#cargando").hide();
-            window.location.href = '#/final';
-		}).error(function(data){
-            console.log("ha ocurrido un error en guardar los datos");
-            $('#cargando').show();
-            $route.reload();   
-        })
-    }
-    $scope.cambio_nombre = function($numero)
-    {
-        $("#cargando").show();
-        $("#tramites").hide();
-        socket.emit("cambio", "A"+$numero);
-
-        //agregando numero a la tabla tikets
-        $http({
-            method:"post",
-            url: "http://localhost/turnomatic/public/api/tikets_aclaraciones",
-            //url: "http://192.168.1.57:8080/turnomatic/public tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '2', 'asunto' : 'Cambio de nombre', 'subasunto' : 'Tramites' })
-        }).success(function(data){
-            console.log("datos guardados con exito");
-            socket.emit("imprimir");
-            $("#cargando").hide();
-			window.location.href = '#/final';
-		}).error(function(data){
-            console.log("ha ocurrido un error en guardar los datos");
-            $('#cargando').show();
-            $route.reload();   
-        })
-    }
-    $scope.carta_adeudo = function($numero)
-    {
-        $("#cargando").show();
-        $("#tramites").hide();
-        socket.emit("carta", "A"+$numero);
-
-        //agregando numero a la tabla tikets
-        $http({
-            method:"post",
-            url: "http://localhost/turnomatic/public/api/tikets_aclaraciones",
-            //url: "http://192.168.1.57:8080/turnomatic/public tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '2', 'asunto' : 'Carta de adeudo', 'subasunto' : 'Tramites' })
-        }).success(function(data){
-            console.log("datos guardados con exito");
-            socket.emit("imprimir");
-            $("#cargando").hide();
-            window.location.href = '#/final';
-		}).error(function(data){
-            console.log("ha ocurrido un error en guardar los datos");
-            $('#cargando').show();
-            $route.reload();
-        })
-    }
-    $scope.factibilidad = function($numero)
-    {
-        $("#cargando").show();
-        $("#tramites").hide();
-        socket.emit("factibilidad","A"+$numero);
-
-        //agregando numero a la tabla tikets
-        $http({
-            method:"post",
-            url: "http://localhost/turnomatic/public/api/tikets_aclaraciones",
-            //url: "http://192.168.1.57:8080/turnomatic/public tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '2', 'asunto' : 'Factibilidad', 'subasunto' : 'Tramites' })
-        }).success(function(data){
-            console.log("datos guardados con exito");
-            socket.emit("imprimir");
-			$("#cargando").hide();
-            window.location.href = '#/final';
-		}).error(function(data){
-            console.log("ha ocurrido un error en guardar los datos");
-            $('#cargando').show();
-            $route.reload();
-        })
-    }
-    $scope.dostramites = function($numero)
-    {
-        //alert($numero);
-        $("#cargando").show();
-        $("#tramites").hide();
-        socket.emit("pdf", "A"+$numero);
-
-        //agregando numero a la tabla tikets
-        $http({
-            method:"post",
-            //url: "http://192.168.1.57:8080/turnomatic/public tikets",
-            url: "http://localhost/turnomatic/public/api/tikets_aclaraciones",
-            data: ({'turno' : $numero , 'id_sucursal' : '2', 'asunto' : '2 o mas tramites', 'subasunto' : 'Tramites' })
-        }).success(function(data){
-            console.log("datos guardados con exito");
-            socket.emit("imprimir");
-			$("#cargando").hide();
-            window.location.href = '#/final';
-		}).error(function(data){
-            console.log("ha ocurrido un error en guardar los datos");
-            $('#cargando').show();
-            $route.reload();
-        })
-    }
-    /*Fin de servicios*/
 });
 rutas.controller('aclaracionesController', function($scope, $http, socket, $route) 
 {
     //trayendo folios
     $http({
         method:"get",
-        url: "http://localhost/turnomatic/public/api/aclaraciones/2"
+        url: "http://localhost/turnomatic/public/api/aclaraciones/1"
         //url: "http://192.168.1.57:8080/turnomatic/public folios/aclaraciones/2"
     }).success(function(data)
     {
@@ -329,7 +148,7 @@ rutas.controller('aclaracionesController', function($scope, $http, socket, $rout
     $scope.alto_consumo = function($numero)
     {
         $("#cargando").show();
-        $("#aclaraciones").hide();
+        $("#opciones").hide();
         socket.emit("alto_consumo", "A"+$numero);
 
         //agregando numero a la tabla tikets
@@ -337,172 +156,13 @@ rutas.controller('aclaracionesController', function($scope, $http, socket, $rout
             method:"post",
             url: "http://localhost/turnomatic/public/api/tikets_aclaraciones",
             //url: "http://192.168.1.57:8080/turnomatic/public tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '2', 'asunto' : 'Alto consumo (con y sin medidor)', 'subasunto' : 'Aclaraciones y Otros' })
+            data: ({'turno' : $numero, 'id_sucursal' : '1','asunto' : 'Seleccione', 'subasunto' : 'Aclaraciones y Otros' })
         }).success(function(data){
             console.log("datos guardados con exito");
-            socket.emit("imprimir");
+            socket.emit("imprimir", { letra: 'A', numero : $numero, subasunto : 'aclaraciones' });
 			$("#cargando").hide();
             window.location.href = '#/final';
 		}).error(function(data){
-            console.log("ha ocurrido un error en guardar los datos");
-            $('#cargando').show();
-            $route.reload();
-        })
-    }
-    $scope.reconexion = function($numero)
-    {
-        $("#cargando").show();
-        $("#aclaraciones").hide();
-        socket.emit("reconexion", "A"+$numero);
-
-        //agregando numero a la tabla tikets
-        $http({
-            method:"post",
-            url: "http://localhost/turnomatic/public/api/tikets_aclaraciones",
-            //url: "http://192.168.1.57:8080/turnomatic/public tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '2', 'asunto' : 'Reconexion de servicio', 'subasunto' : 'Aclaraciones y Otros' })
-        }).success(function(data){
-            console.log("datos guardados con exito");
-            socket.emit("imprimir");
-            $("#cargando").show();
-			window.location.href = '#/final';
-        }).error(function(data){
-            console.log("ha ocurrido un error en guardar los datos");
-        })
-	}
-    $scope.error_lectura = function($numero)
-    {
-        $("#cargando").show();
-        $("#aclaraciones").hide();
-        socket.emit("error_lectura", "A"+$numero);
-
-        //agregando numero a la tabla tikets
-        $http({
-            method:"post",
-            url: "http://localhost/turnomatic/public/api/tikets_aclaraciones",
-            //url: "http://192.168.1.57:8080/turnomatic/public tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '2', 'asunto' : 'Error en lectura', 'subasunto' : 'Aclaraciones y Otros' })
-        }).success(function(data){
-            console.log("datos guardados con exito");
-            socket.emit("imprimir");
-			$("#cargando").hide();
-            window.location.href = '#/final';
-        }).error(function(data){
-            console.log("ha ocurrido un error en guardar los datos");
-            $('#cargando').show();
-            $route.reload();
-        })
-    }
-    $scope.no_toma_lectura = function($numero)
-    {
-        $("#cargando").show();
-        $("#aclaraciones").hide();
-        socket.emit("no_toma_lectura", "A"+$numero);
-
-        //agregando numero a la tabla tikets
-        $http({
-            method:"post",
-            url: "http://localhost/turnomatic/public/api/tikets_aclaraciones",
-            //url: "http://192.168.1.57:8080/turnomatic/public tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '2', 'asunto' : 'No toma lectura', 'subasunto' : 'Aclaraciones y Otros' })
-        }).success(function(data){
-            console.log("datos guardados con exito");
-            socket.emit("imprimir");
-			$("#cargando").hide();
-            window.location.href = '#/final';
-        }).error(function(data){
-            console.log("ha ocurrido un error en guardar los datos");
-            $('#cargando').show();
-            $route.reload();
-        })
-    }    
-    $scope.noentrega = function($numero)
-    {
-        $("#cargando").show();
-        $("#aclaraciones").hide();
-        socket.emit("no_entrega", "A"+$numero);
-
-        //agregando numero a la tabla tikets
-        $http({
-            method:"post",
-            url: "http://localhost/turnomatic/public/api/tikets_aclaraciones",
-            //url: "http://192.168.1.57:8080/turnomatic/public tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '2', 'asunto' : 'No entrega de recibo', 'subasunto' : 'Aclaraciones y Otros' })
-        }).success(function(data){
-            console.log("datos guardados con exito");
-            socket.emit("imprimir");
-            $("#cargando").hide();
-            window.location.href = '#/final';
-        }).error(function(data){
-            console.log("ha ocurrido un error en guardar los datos");
-            $('#cargando').show();
-            $route.reload();
-        })
-    }
-    $scope.cambio_tarifa = function($numero)
-    {
-        $("#cargando").show();
-        $("#aclaraciones").hide();
-        socket.emit("cambio_tarifa", "A"+$numero);
-
-        //agregando numero a la tabla tikets
-        $http({
-            method:"post",
-            url: "http://localhost/turnomatic/public/api/tikets_aclaraciones",
-            //url: "http://192.168.1.57:8080/turnomatic/public tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '2', 'asunto' : 'Cambio de tarifa', 'subasunto' : 'Aclaraciones y Otros' })
-        }).success(function(data){
-            console.log("datos guardados con exito");
-            socket.emit("imprimir");
-            $("#cargando").hide();
-			window.location.href = '#/final';
-        }).error(function(data){
-            console.log("ha ocurrido un error en guardar los datos");
-            $('#cargando').show();
-            $route.reload();
-        })
-    }
-    $scope.solicitud = function($numero)
-    {
-        $("#cargando").show();
-        $("#aclaraciones").hide();
-        socket.emit("solicitud", "A"+$numero);
-
-        //agregando numero a la tabla tikets
-        $http({
-            method:"post",
-            url: "http://localhost/turnomatic/public/api/tikets_aclaraciones",
-            //url: "http://192.168.1.57:8080/turnomatic/public tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '2', 'asunto' : 'Solicitud de medidor', 'subasunto' : 'Aclaraciones y Otros' })
-        }).success(function(data){
-            console.log("datos guardados con exito");
-            socket.emit("imprimir");
-            $("#cargando").hide();
-            window.location.href = '#/final';
-        }).error(function(data){
-            console.log("ha ocurrido un error en guardar los datos");
-            $('#cargando').show();
-            $route.reload();
-        })
-    }
-    $scope.otros_tramites = function($numero)
-    {
-        $("#cargando").show();
-        $("#aclaraciones").hide();
-        socket.emit("otros", "A"+$numero);
-
-        //agregando numero a la tabla tikets
-        $http({
-            method:"post",
-            url: "http://localhost/turnomatic/public/api/tikets_aclaraciones",
-            //url: "http://192.168.1.57:8080/turnomatic/public tikets",
-            data: ({'turno' : $numero, 'id_sucursal' : '2', 'asunto' : 'Otros tramites', 'subasunto' : 'Aclaraciones y Otros' })
-        }).success(function(data){
-            console.log("datos guardados con exito");
-           	socket.emit("imprimir");
-            $("#cargando").hide();
-            window.location.href = '#/final';
-        }).error(function(data){
             console.log("ha ocurrido un error en guardar los datos");
             $('#cargando').show();
             $route.reload();
