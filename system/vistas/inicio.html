@@ -7,33 +7,25 @@
 	</div>
 	<br>
 	<div class="row" style="width:1024px; position: absolute; top: 400px; left: 10px;">
-	<div id="opciones">	
-		<div class="col-md-4" ng-controller="tramitesController">
-			<div ng-repeat="data in datos" id="tramites" ng-click="contratos(data.numero)">
-				<!--<a href="#/pagos_tramites">-->
-				<br>
-					<!--<p style="text-align: center;">{{data.numero}}</p>-->
-					<h1 style="text-align: center;"><img src="img/tramites.png"></h1>
-				<!--</a>-->
-			</div>
-		</div>
-		<div class="col-md-4" ng-controller="pagosController">
-			<div ng-repeat="data in datos" ng-click="pagos(data.numero)">
+	<div id="opciones">
+		<div class="col-md-1"></div>	
+		<div class="col-md-5" ng-controller="pagosController">
+			<div ng-repeat="data in datos" ng-click="pago(data.numero)">
 				<!--<a href="#/pago">-->
 					<!--<p style="text-align: center;">{{data.numero}}</p>-->
 					<h1 style="text-align: center;"><img src="img/pago.png"></h1>
 				<!--</a>-->
 			</div>	
 		</div>
-		<div class="col-md-4" ng-controller="aclaracionesController">
-			<div ng-repeat="data in datos" ng-click="alto_consumo(data.numero)">
-				<br>
+		<div class="col-md-5" ng-controller="aclaracionesController">
+			<div ng-repeat="data in datos" ng-click="aclaracion(data.numero)">
 				<!--<a href="#/aclaraciones_otros">-->
 					<!--<p style="text-align: center;">{{data.numero}}</p>-->
 					<h1 style="text-align: center;"><img src="img/aclaraciones.png"></h1>
 				<!--</a>-->
 			</div>	
 		</div>
+		<div class="col-md-1"></div>
 	</div>
 	<div class="row">
 		<div class="progress" id="cargando">
